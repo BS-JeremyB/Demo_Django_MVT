@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Liste de livre {% endblock %}
+
+{% block content %}
+<div>
+<ul>
+    {% for book in books %}
+        <li>Titre : {{book.titre}}</li>
+        <li>Auteur : {{book.auteur}}</li>
+        <hr>
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}
+
