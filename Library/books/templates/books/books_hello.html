@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %} Test Formulaire {% endblock %}
+
+{% block content %}
+
+<form method= "POST">   
+    {% csrf_token %}
+    {{ form }}
+
+    <button type="submit">Créer</button>
+</form>
+
+<p>{{values.nom}}</p>
+<p>{{values.message}}</p>
+
+{% endblock %}
