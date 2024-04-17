@@ -6,7 +6,12 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-    <span> Home </span><span> Books </span><span> Authors </span>
+    <nav>
+        <a href="{% url 'books_list' %}">Voir nos livres </a>
+        <span> | </span>
+        <a href="{% url 'books_create' %}"> Créer un livre </a>
+
+    </nav>
     {% block content %} {% endblock %}
 </body>
 </html>

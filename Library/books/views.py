@@ -1,20 +1,21 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .forms import HelloForm, Create_books_form
+from .models import *
 
-books = [{ 'auteur': 'Orwel', 'titre': '1984'},
-        { 'auteur': 'Herbert', 'titre': 'Dune'},
-        { 'auteur': 'Tolkien', 'titre': 'Le seigneur des anneaux'},
-        { 'auteur': 'Doe', 'titre': 'Django pour les nuls'},
-        ]
 # Create your views here.
 def books_list(request):
+    books = Book.objects.all()
     return render(request, 'books/book_list.html', {'books': books})
 
 
 
 def book_detail(request, id):
-    return render(request, 'books/book_detail.html', {'book': books[id]})
+    try:
+        book = Book.objects.get(id=id)
+        return render(request, 'books/book_detail.html', {'book': book})
+    except Exception as e:
+        return HttpResponse("Le livre n'existe pas, erreur : ",e)
 
 def hello(request):
     form = HelloForm
