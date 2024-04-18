@@ -2,6 +2,11 @@
 {% block title %} Liste de livre {% endblock %}
 
 {% block content %}
+<form method="get" action="{% url 'books_list' %}">
+    <input type="text" name="q" placeholder="Rechercher des livres...">
+    <button type="submit">Recherche</button>
+</form>
+<hr>
 <div>
 <ul>
     {% for book in books %}

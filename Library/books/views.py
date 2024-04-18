@@ -1,11 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.db.models import Q
 from .forms import HelloForm, Create_books_form
 from .models import *
 
 # Create your views here.
 def books_list(request):
-    books_from_db = Book.objects.all()
+    query = request.GET.get('q', '')
+    if query:
+        books_from_db = Book.objects.filter(
+            Q(author__firstname__icontains=query) | 
+            Q(author__lastname__icontains=query) |
+            Q(title__icontains=query) |
+            Q(genre__icontains=query)
+        )
+    else:
+        books_from_db = Book.objects.all()
     return render(request, 'books/book_list.html', {'books': books_from_db})
    
 
