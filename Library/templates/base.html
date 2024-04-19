@@ -16,6 +16,12 @@
         <a href="#">My Library</a>
         <a href="{% url 'books_list' %}">Home</a>
         <a href="{% url 'books_create' %}">Créer</a>
+        {% if user.is_authenticated %}
+        <a class="log" href="{% url 'log_out' %}">Se déconnecter</a>
+        {% else %}
+        <a class="log" href="{% url 'log_in' %}">Se connecter</a>
+        <a class="log" href="{% url 'register' %}">Créer un compte</a>
+        {% endif %}
       </nav>
     {% block content %} {% endblock %}
 </body>

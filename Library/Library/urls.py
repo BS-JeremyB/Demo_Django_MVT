@@ -22,5 +22,6 @@ urlpatterns = [
     path('', views.index),
     path('books/', include('books.urls')),
     path('reviews/', include('reviews.urls')),
+    path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
 ]

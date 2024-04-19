@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.db.models import Q
 from .forms import HelloForm, Create_books_form
 from .models import *
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def books_list(request):
@@ -16,7 +18,11 @@ def books_list(request):
         )
     else:
         books_from_db = Book.objects.all()
-    return render(request, 'books/book_list.html', {'books': books_from_db})
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        user= ""
+    return render(request, 'books/book_list.html', {'books': books_from_db, 'user': user})
    
 
 
@@ -41,7 +47,7 @@ def book_update(request, id):
     form_from_view = Create_books_form(instance= book_from_db)
     return render(request, 'books/book_update.html', {'form_in_template' : form_from_view} )
 
-
+@login_required
 def book_delete (request, id):
     book_from_db = Book.objects.get(id=id)
     book_from_db.delete()
