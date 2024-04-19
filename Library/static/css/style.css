@@ -1,0 +1,9 @@
+nav {
+    background-color: rgb(12, 12, 49);
+    padding: 10px;
+}
+nav>a{
+    color: aliceblue;
+    text-decoration: none;
+    padding: 10px;
+}

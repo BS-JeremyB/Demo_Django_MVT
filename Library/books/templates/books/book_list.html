@@ -2,23 +2,35 @@
 {% block title %} Liste de livre {% endblock %}
 
 {% block content %}
+
 <form method="get" action="{% url 'books_list' %}">
-    <input type="text" name="q" placeholder="Rechercher des livres...">
+    <input type="text" name="query" placeholder="Rechercher des livres...">
     <button type="submit">Recherche</button>
 </form>
-<hr>
-<div>
-<ul>
-    {% for book in books %}
-        <li>Titre : {{book.title}}</li>
-        <li>Auteur : {{book.author}}</li>
-        <a href="{% url 'books_detail' id=book.id %}">Voir le livre</a>
-        <a href="{% url 'books_update' id=book.id %}">Modifier le livre</a>
-        <a href="{% url 'books_delete' id=book.id %}">Supprimer le livre</a>
-        <hr>
 
+<hr>
+<div class="container">
+    <div class="row">
+        {% for book in books %}
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 100%;">
+                
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="Image de livre">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text">Auteur : {{ book.author }}</p>
+
+                        <!-- Boutons d'action -->
+                        <a href="{% url 'books_detail' id=book.id %}" class="btn btn-primary btn-sm">Voir le livre</a>
+                        <a href="{% url 'books_update' id=book.id %}" class="btn btn-secondary btn-sm">Modifier le livre</a>
+                        <a href="{% url 'books_delete' id=book.id %}" class="btn btn-danger btn-sm">Supprimer le livre</a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-</ul>
+    </div>
 </div>
+
 {% endblock %}
 

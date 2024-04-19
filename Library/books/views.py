@@ -6,7 +6,7 @@ from .models import *
 
 # Create your views here.
 def books_list(request):
-    query = request.GET.get('q', '')
+    query = request.GET.get('query', '')
     if query:
         books_from_db = Book.objects.filter(
             Q(author__firstname__icontains=query) | 
